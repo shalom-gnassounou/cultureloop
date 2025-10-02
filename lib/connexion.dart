@@ -5,6 +5,18 @@ class Connexion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: SafeArea(child: Container(color: Colors.blue,)));
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/connexion.png"),
+              fit: BoxFit.cover,
+            ),
+          ),
+
+        ),
+      ),
+    );
   }
 }
