@@ -1,85 +1,114 @@
 import 'package:flutter/material.dart';
 import 'package:local_auth/local_auth.dart';
 
-class AuthFinger extends StatefulWidget {
-  const AuthFinger({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<AuthFinger> createState() => _AuthFingerState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _AuthFingerState extends State<AuthFinger> {
-  final LocalAuthentication authentication = LocalAuthentication();
-
-  Future<void> _authenticate() async {
-    bool authenticated = false;
-    try {
-      authenticated = await authentication.authenticate(
-        localizedReason: "Veuillez vous identifiez avec votre empreinte",
-        options: const AuthenticationOptions(
-          biometricOnly: true,
-          stickyAuth: true,
-        ),
-      );
-    } catch (errors) {
-      print("erreurs: $errors");
-    }
-    if (authenticated) {
-      print("Authentification réussie !");
-      // Navigator.pushReplacement(...);
-    } else {
-      print("echec");
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
-  }
-
-
-}
-
-
-class Connexion extends StatelessWidget {
-  const Connexion({super.key});
+class _LoginPageState extends State<LoginPage> {
+  String _message = "";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          decoration: BoxDecoration(
+          // Background image
+          decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/connexion.png"),
+              image: AssetImage("assets/connexion.png"), // ton background
               fit: BoxFit.cover,
             ),
           ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 20),
-              Center(
-                child: Image.asset("assets/logo.png", height: 85, width: 85),
+              // Logo en haut
+              Image.asset(
+                "assets/logo.png", // ton logo
+                width: 85,
+                height: 85,
               ),
-              Text(
-                "-Connexion-",
+              const SizedBox(height: 30),
+
+              // Texte de bienvenue
+              const Text(
+                "Connexion",
                 style: TextStyle(
-                  fontSize: 30,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
                   color: Colors.black,
-                  fontWeight: FontWeight.w800,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 5,
+                      color: Colors.black54,
+                      offset: Offset(2, 2),
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(height: 60),
-              ElevatedButton.icon(
-                onPressed:(){
+              const SizedBox(height: 50),
 
+              GestureDetector(
+                onTap: () async {
+                  final LocalAuthentication auth = LocalAuthentication();
+                  final List<BiometricType> availableBiometrics =
+                  await auth.getAvailableBiometrics();
+                  if (availableBiometrics.contains(BiometricType.strong) ||
+                      availableBiometrics.contains(BiometricType.face)) {
+                    bool authenticated = false;
+                    try {
+                      authenticated = await auth.authenticate(
+                        localizedReason:
+                        "Veuillez vous identifier avec votre empreinte",
+                        options: const AuthenticationOptions(
+                          biometricOnly: true,
+                          stickyAuth: true,
+                        ),
+                      );
+                    } catch (e) {
+                      print("Erreur d'authentification: $e");
+                    }
+
+                    // 3️⃣ Feedback
+                    setState(() {
+                      _message = authenticated
+                          ? "Authentification réussie !"
+                          : "Échec de l'authentification";
+                    });
+
+                    if (authenticated) {
+                      // Navigator.pushReplacement(...) si tu veux passer à la page suivante
+                    }
+                  } else {
+                    setState(() {
+                      _message =
+                      "Aucun capteur biométrique compatible disponible !";
+                    });
+                  }
                 },
-                icon: Icon(Icons.fingerprint, size: 30),
-                label: Text("conexion avec l'empreinte"),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  foregroundColor: Colors.black,
+                child: Container(
+                  padding: const EdgeInsets.all(25),
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.fingerprint,
+                    size: 80,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                _message,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
                 ),
               ),
             ],
@@ -89,3 +118,4 @@ class Connexion extends StatelessWidget {
     );
   }
 }
+
