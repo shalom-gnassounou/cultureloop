@@ -126,7 +126,57 @@ class _LoginPageState extends State<LoginPage> {
                 icon: Icon(Icons.apple),
                 label: Text("Connexion avec apple"),
               ),
-
+              ElevatedButton(
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                    ),
+                    builder: (BuildContext context) {
+                      return SizedBox(
+                        height: 300,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton.icon(
+                              onPressed: () {
+                                print("Inscription avec Google");
+                              },
+                              icon: Image.asset("assets/Google.svg.png", height: 24),
+                              label: const Text("Inscription avec Google"),
+                            ),
+                             SizedBox(height: 20),
+                            ElevatedButton.icon(
+                              onPressed: () {
+                                print("Inscription avec Facebook");
+                              },
+                              icon: Icon(Icons.facebook),
+                              label: const Text("Inscription avec Facebook"),
+                            ),
+                             SizedBox(height: 20),
+                            ElevatedButton.icon(
+                              onPressed: () {
+                                print("Inscription avec Apple");
+                              },
+                              icon: Icon(Icons.apple),
+                              label: const Text("Inscription avec Apple"),
+                            ),
+                            SizedBox(height: 20,),
+                            ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text("Fermer l'inscription")
+                            )
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                },
+                child: const Text("Pas encore inscrit ?"),
+              )
             ],
           ),
         ),
