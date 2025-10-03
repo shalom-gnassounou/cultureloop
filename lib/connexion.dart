@@ -20,14 +20,27 @@ class Connexion extends StatelessWidget {
               Center(
                 child: Image.asset("assets/logo.png", height: 85, width: 85),
               ),
-              Text("-Connexion-",
+              Text(
+                "-Connexion-",
                 style: TextStyle(
                   fontSize: 30,
                   color: Colors.black,
                   fontWeight: FontWeight.w800,
                 ),
+              ),
+              SizedBox(height: 60,),
+              ElevatedButton.icon(
+                  onPressed : () {
+                    //local_auth function
+                  },
+                  icon: Icon(Icons.fingerprint,size:30),
+                  label: Text("conexion avec l'empreinte"),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    foregroundColor: Colors.black,
+                  )
+                    )
 
-              )
             ],
           ),
         ),
