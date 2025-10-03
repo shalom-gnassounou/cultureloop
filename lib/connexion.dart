@@ -16,31 +16,30 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          // Background image
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/connexion.png"), // ton background
+              image: AssetImage("assets/connexion.png"),
               fit: BoxFit.cover,
             ),
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Logo en haut
-              Image.asset(
-                "assets/logo.png", // ton logo
-                width: 85,
-                height: 85,
+              SizedBox(height: 20),
+              Center(
+                child: Image.asset(
+                  "assets/logo.png",
+                  width: 85,
+                  height: 85,
+                ),
               ),
-              const SizedBox(height: 30),
+              SizedBox(height: 30),
 
-              // Texte de bienvenue
               const Text(
                 "Connexion",
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: Colors.white,
                   shadows: [
                     Shadow(
                       blurRadius: 5,
@@ -50,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
               ),
-              const SizedBox(height: 50),
+               SizedBox(height: 50),
 
               GestureDetector(
                 onTap: () async {
@@ -72,8 +71,6 @@ class _LoginPageState extends State<LoginPage> {
                     } catch (e) {
                       print("Erreur d'authentification: $e");
                     }
-
-                    // 3️⃣ Feedback
                     setState(() {
                       _message = authenticated
                           ? "Authentification réussie !"
@@ -93,17 +90,17 @@ class _LoginPageState extends State<LoginPage> {
                 child: Container(
                   padding: const EdgeInsets.all(25),
                   decoration: BoxDecoration(
-                    color: Colors.black,
+                    color: Colors.white,
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(
                     Icons.fingerprint,
                     size: 80,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               Text(
                 _message,
                 style: const TextStyle(
@@ -111,6 +108,25 @@ class _LoginPageState extends State<LoginPage> {
                   fontSize: 16,
                 ),
               ),
+              SizedBox(height: 40,),
+              ElevatedButton.icon(
+                onPressed: () {},
+                icon: Image.asset("assets/Google.svg.png",height: 24,),
+                label: Text("Connexion avec google"),
+              ),
+              SizedBox(height: 20,),
+              ElevatedButton.icon(
+                onPressed: () {},
+                icon: Icon(Icons.facebook),
+                label: Text("Connexion avec facebook"),
+              ),
+              SizedBox(height: 20,),
+              ElevatedButton.icon(
+                onPressed: () {},
+                icon: Icon(Icons.apple),
+                label: Text("Connexion avec apple"),
+              ),
+
             ],
           ),
         ),
