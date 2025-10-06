@@ -63,8 +63,8 @@ flutter:
   assets:
     - assets/connexion.png
     - assets/logo.png
-    #- assets/images/photos/
-    #- assets/images/pictos/
+    - assets/images/photos/
+    - assets/images/pictos/
     - assets/Google.svg.png
 
   # An image asset can refer to one or more resolution-specific "variants", see

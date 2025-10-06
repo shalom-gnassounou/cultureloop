@@ -1,3 +1,4 @@
+import 'package:cultureloop/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:local_auth/local_auth.dart';
 
@@ -110,19 +111,37 @@ class _LoginPageState extends State<LoginPage> {
               ),
               SizedBox(height: 40,),
               ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (context) => const HomePage(),
+                    ),
+                  );
+                },
                 icon: Image.asset("assets/Google.svg.png",height: 24,),
                 label: Text("Connexion avec google"),
               ),
               SizedBox(height: 20,),
               ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (context) => const HomePage(),
+                    ),
+                  );
+                },
                 icon: Icon(Icons.facebook),
                 label: Text("Connexion avec facebook"),
               ),
               SizedBox(height: 20,),
               ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (context) => const HomePage(),
+                    ),
+                  );
+                },
                 icon: Icon(Icons.apple),
                 label: Text("Connexion avec apple"),
               ),
@@ -141,7 +160,11 @@ class _LoginPageState extends State<LoginPage> {
                           children: [
                             ElevatedButton.icon(
                               onPressed: () {
-                                print("Inscription avec Google");
+                                Navigator.of(context).push(
+                                  MaterialPageRoute<void>(
+                                    builder: (context) => const HomePage(),
+                                  ),
+                                );
                               },
                               icon: Image.asset("assets/Google.svg.png", height: 24),
                               label: const Text("Inscription avec Google"),
@@ -157,7 +180,11 @@ class _LoginPageState extends State<LoginPage> {
                              SizedBox(height: 20),
                             ElevatedButton.icon(
                               onPressed: () {
-                                print("Inscription avec Apple");
+                                Navigator.of(context).push(
+                                  MaterialPageRoute<void>(
+                                    builder: (context) => const HomePage(),
+                                  ),
+                                );
                               },
                               icon: Icon(Icons.apple),
                               label: const Text("Inscription avec Apple"),
