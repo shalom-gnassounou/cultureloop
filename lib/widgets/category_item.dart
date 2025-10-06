@@ -25,7 +25,7 @@ class CategoryItem extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          // 🌫️ Overlay sombre pour la transparence
+          // Overlay sombre pour la transparence
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
