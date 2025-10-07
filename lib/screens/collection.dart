@@ -1,5 +1,5 @@
 import 'package:cultureloop/widgets/header_section.dart';
-import 'package:cultureloop/widgets/navigation_bar_app.dart';
+import '../widgets/navigation_bar_app.dart';
 import 'package:flutter/material.dart';
 
 class Africa extends StatelessWidget {
@@ -78,6 +78,7 @@ class Africa extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: NavigationBarApp(),
     );
   }
 }

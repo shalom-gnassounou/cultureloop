@@ -1,5 +1,7 @@
 
+import 'package:cultureloop/screens/collection.dart';
 import 'package:cultureloop/screens/connexion.dart';
+import 'package:cultureloop/screens/detail.dart';
 import 'package:cultureloop/screens/home.dart';
 import 'package:flutter/material.dart';
 

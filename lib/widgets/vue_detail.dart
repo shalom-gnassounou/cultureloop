@@ -152,3 +152,4 @@ class VueDetail extends StatelessWidget {
       ),
     );
   }
+}
