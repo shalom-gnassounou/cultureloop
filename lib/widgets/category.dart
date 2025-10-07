@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'category_item.dart';
 
 class CategorySection extends StatelessWidget {
-  const CategorySection({super.key});
+  //final VoidCallback? onTap;
+  const CategorySection({super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +14,8 @@ class CategorySection extends StatelessWidget {
           title: 'African Art',
           imagePath: 'assets/images/photos/AfricanArt.jpg',
           iconPath: 'assets/images/pictos/africain.png',
+
+
         ),
         CategoryItem(
           title: 'Asian Art',

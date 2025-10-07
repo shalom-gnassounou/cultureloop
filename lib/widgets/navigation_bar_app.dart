@@ -9,6 +9,7 @@ Widget NavigationBarApp() {
         icon: Icon(Icons.home),
       ),
       BottomNavigationBarItem(
+
         label: 'Collections',
         icon: Icon(Icons.library_add),
       ),
