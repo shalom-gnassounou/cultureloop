@@ -9,13 +9,15 @@ class CategorySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
+      children:  [
         CategoryItem(
           title: 'African Art',
           imagePath: 'assets/images/photos/AfricanArt.jpg',
           iconPath: 'assets/images/pictos/africain.png',
+          onTap: () {
+            Navigator.pushNamed(context, '/africa');
 
-
+          },
         ),
         CategoryItem(
           title: 'Asian Art',
