@@ -1,4 +1,4 @@
-import 'package:cultureloop/screens/collection.dart';
+
 import 'package:cultureloop/screens/connexion.dart';
 import 'package:cultureloop/screens/home.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Culture Loop',
-     home:Africa()
+     home: LoginPage(),
     );
   }
 }
