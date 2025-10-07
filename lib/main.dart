@@ -18,6 +18,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Culture Loop',
      home: LoginPage(),
+      routes: {
+        '/login': (context) => const LoginPage(),
+        '/home': (context) => const HomePage(),
+        '/africa': (context) => const Africa(),
+        '/detail': (context) => const Detail(),
+      },
     );
   }
 }

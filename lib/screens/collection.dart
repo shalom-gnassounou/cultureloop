@@ -61,6 +61,9 @@ class Africa extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: ListTile(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/detail');
+                      },
                       leading: Image.asset(
                         "assets/images/photos/AfricanArt.jpg",
                         width: 60,
