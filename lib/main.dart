@@ -21,7 +21,17 @@ class MyApp extends StatelessWidget {
       routes: {
         '/login': (context) => const LoginPage(),
         '/home': (context) => const HomePage(),
-        '/africa': (context) => const Africa(),
+        '/collection': (context) {
+          final args = ModalRoute.of(context)?.settings.arguments;
+          final Map<String, dynamic> params = (args is Map<String, dynamic>)
+              ? args
+              : {'departmentId': 0, 'title': 'Collection'};
+          return CollectionScreen(
+            departmentId: params['departmentId'] as int,
+            title: params['title'] as String,
+          );
+        },
+
         '/detail': (context) => const Detail(),
       },
     );
