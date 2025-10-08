@@ -23,6 +23,7 @@ class CategoryItem extends StatelessWidget {
         height: 180,
         margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
           image: DecorationImage(
             image: AssetImage(imagePath),
             fit: BoxFit.cover,

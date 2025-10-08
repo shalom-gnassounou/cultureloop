@@ -5,143 +5,174 @@ class VueDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Map<String, dynamic> object =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>? ??
+        {};
+
+    final String title = object['title'] ?? 'Titre inconnu';
+    final String imageUrl = object['primaryImage'] ?? '';
+    final String creditLine = object['creditLine'] ?? '';
+    final String department = object['department'] ?? '';
+    final String artistDisplayName = object['artistDisplayName'] ?? 'Artiste inconnu';
+    final String artistDisplayBio = object['artistDisplayBio'] ?? '';
+    final String classification = object['classification'] ?? '';
+    final String accessionYear = object['accessionYear'] ?? '';
+    final String medium = object['medium'] ?? '';
+    final String dimensions = object['dimensions'] ?? '';
+    final String period = object['period'] ?? '';
+    final String objectDate = object['objectDate'] ?? '';
+
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Quail and Millet",
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.w800,
+          Center(
+            child: Text(
+              title,
+              style: const TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w800,
+              ),
+              textAlign: TextAlign.center,
             ),
           ),
-          SizedBox(height: 20),
-          Image.asset(
-            "assets/images/photos/QuaiAndMillet.jpeg",
-            width: double.infinity,
-            fit: BoxFit.cover,
-          ),
-          SizedBox(height: 8),
-          Container(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "creditLine: The Howard Mansfield Collection, Purchase, Rogers Fund, 1936",
-              style: TextStyle(
+          const SizedBox(height: 20),
+          imageUrl.isNotEmpty
+              ? ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.network(
+                    imageUrl,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return Container(
+                        height: 300,
+                        alignment: Alignment.center,
+                        child: CircularProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                                    loadingProgress.expectedTotalBytes!
+                              : null,
+                        ),
+                      );
+                    },
+                  ),
+                )
+              : Container(
+                  height: 300,
+                  color: Colors.grey[300],
+                  child: const Icon(Icons.image, size: 100),
+                ),
+          const SizedBox(height: 8),
+          if (creditLine.isNotEmpty)
+            Text(
+              creditLine,
+              style: const TextStyle(
                 fontSize: 10,
+                fontStyle: FontStyle.italic,
               ),
             ),
-          ),
-          SizedBox(height: 16),
-          Divider(thickness: 1),
+          const SizedBox(height: 16),
+          const Divider(thickness: 1),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Icon(Icons.favorite_border, size: 30),
-              Icon(Icons.photo_camera, size: 30),
-              Icon(Icons.border_color, size: 30),
-              Icon(Icons.download, size: 30),
+              IconButton(
+                icon: const Icon(Icons.favorite_border, size: 30),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Icons.photo_camera, size: 30),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Icons.border_color, size: 30),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Icons.download, size: 30),
+                onPressed: () {},
+              ),
             ],
           ),
-          Divider(thickness: 1),
-          SizedBox(height: 16),
-          Container(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "department: Asian Art",
-              style: TextStyle(
+          const Divider(thickness: 1),
+          const SizedBox(height: 16),
+          if (department.isNotEmpty)
+            Text(
+              department,
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w800,
               ),
             ),
-          ),
-          Container(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "Kiyohara Yukinobu",
-              style: TextStyle(
-                fontSize: 36,
-                fontWeight: FontWeight.w800,
-                color: Color(0xFFC6A169),
-              ),
+          const SizedBox(height: 8),
+          Text(
+            artistDisplayName,
+            style: const TextStyle(
+              fontSize: 36,
+              fontWeight: FontWeight.w800,
+              color: Color(0xFFC6A169),
             ),
           ),
-          Container(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "artistDisplayBio: Japanese, 1643–1682",
-              style: TextStyle(
-                fontSize: 16,
-              ),
+          if (artistDisplayBio.isNotEmpty)
+            Text(
+              artistDisplayBio,
+              style: const TextStyle(fontSize: 16),
             ),
+          const SizedBox(height: 16),
+          _buildInfoBlock('Classification', classification),
+          _buildInfoBlock('Date', objectDate),
+          _buildInfoBlock('Année d\'acquisition', accessionYear),
+          _buildInfoBlock('Medium', medium),
+          _buildInfoBlock('Dimensions', dimensions),
+          _buildInfoBlock('Période', period),
+          const SizedBox(height: 36),
+          Row(
+            children: const [
+              Text(
+                "Paint",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              SizedBox(width: 8),
+              Icon(Icons.border_color, size: 24),
+            ],
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Container(
-            alignment: Alignment.centerLeft,
+            width: double.infinity,
+            height: 400,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey, width: 2),
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "classification: Paintings",
-                  style: TextStyle(fontSize: 14),
-                ),
-                Text(
-                  "accessionYear: 1936",
-                  style: TextStyle(fontSize: 14),
-                ),
-                Text(
-                  "medium: Hanging scroll; ink and color on silk,",
-                  style: TextStyle(fontSize: 14),
-                ),
-                Text(
-                  "dimensions: 46 5/8 x 18 3/4 in. (118.4 x 47.6 cm)",
-                  style: TextStyle(fontSize: 14),
-                ),
-                Text(
-                  "period : Edo period (1615–1868)",
-                  style: TextStyle(fontSize: 14),
-                ),
-                SizedBox(height: 36),
-                Row(
-                  children: [
-                    Text(
-                      "Paint",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w800,
+                Expanded(
+                  child: Container(
+                    color: Colors.white,
+                    child: const Center(
+                      child: Text(
+                        "Zone de dessin",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.grey),
                       ),
                     ),
-                    SizedBox(width: 8),
-                    Icon(Icons.border_color, size: 24),
-                  ],
-                ),
-                SizedBox(height: 16),
-                Container(
-                  width: double.infinity,
-                  height: 500,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey, width: 2),
-                    borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          color: Colors.white,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Icon(Icons.edit, size: 30, color: Colors.black),
-                            Icon(Icons.edit, size: 30, color: Colors.red),
-                            Icon(Icons.edit, size: 30, color: Colors.blue),
-                            Icon(Icons.edit, size: 30, color: Colors.green),
-                          ],
-                        ),
-                      ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: const [
+                      Icon(Icons.edit, size: 30, color: Colors.black),
+                      Icon(Icons.edit, size: 30, color: Colors.red),
+                      Icon(Icons.edit, size: 30, color: Colors.blue),
+                      Icon(Icons.edit, size: 30, color: Colors.green),
                     ],
                   ),
                 ),
@@ -149,6 +180,17 @@ class VueDetail extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildInfoBlock(String label, String value) {
+    if (value.isEmpty) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: Text(
+        '$label: $value',
+        style: const TextStyle(fontSize: 14),
       ),
     );
   }
