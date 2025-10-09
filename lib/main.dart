@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
         },
 
         '/detail': (context) => const Detail(),
+        '/itinerary': (context) => const Itinerary(),
       },
     );
   }

@@ -18,6 +18,7 @@ class CollectionPage extends StatefulWidget {
 class _CollectionPageState extends State<CollectionPage> {
   final MetService _service = MetService();
   List<Map<String, dynamic>> objects = [];
+  late List<Map<String, dynamic>> _filteredItems;
   bool isLoading = true;
 
   @override
@@ -34,11 +35,13 @@ class _CollectionPageState extends State<CollectionPage> {
       setState(() {
         objects = fetchedObjects;
         isLoading = false;
+        _filteredItems = objects;
       });
     } catch (e) {
       print('Erreur lors du chargement des objets : $e');
       setState(() {
         isLoading = false;
+
       });
     }
   }
