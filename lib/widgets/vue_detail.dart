@@ -1,9 +1,44 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class VueDetail extends StatelessWidget {
   const VueDetail({super.key});
 
-  @override
+  Future<void> downloadImage(BuildContext context, String imageUrl, String title) async {
+    try {
+      var status = await Permission.storage.request();
+      if (!status.isGranted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Permission de stockage refusée')),
+        );
+        return;
+      }
+      Directory? directory;
+      if (Platform.isAndroid) {
+        directory = Directory('/storage/emulated/0/Download');
+      } else {
+        directory = await getApplicationDocumentsDirectory();
+      }
+      String fileName = '${title.replaceAll(" ", "_")}.jpg';
+      String filePath = '${directory.path}/$fileName';
+      await Dio().download(imageUrl, filePath);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Image enregistrée dans Téléchargements ')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erreur lors du téléchargement : $e')),
+      );
+    }
+  }
+
+
+
+      @override
   Widget build(BuildContext context) {
     final Map<String, dynamic> object =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>? ??
@@ -93,7 +128,24 @@ class VueDetail extends StatelessWidget {
               ),
               IconButton(
                 icon: const Icon(Icons.download, size: 30),
-                onPressed: () {},
+                onPressed: () {
+                  if (imageUrl.isNotEmpty) {
+                    downloadImage(context, imageUrl, title);
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Aucune image à télécharger.")),
+                    );
+                  }
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.bookmark_border),
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Oeuvre enregistrée dans votre parcours !')),
+                  );
+
+                },
               ),
             ],
           ),
@@ -124,7 +176,7 @@ class VueDetail extends StatelessWidget {
           const SizedBox(height: 16),
           _buildInfoBlock('Classification', classification),
           _buildInfoBlock('Date', objectDate),
-          _buildInfoBlock('Année d\'acquisition', accessionYear),
+          _buildInfoBlock("Année d'acquisition", accessionYear),
           _buildInfoBlock('Medium', medium),
           _buildInfoBlock('Dimensions', dimensions),
           _buildInfoBlock('Période', period),
