@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'itinerary_card.dart';
+import 'itinerary_modal.dart';
 
 class ItineraryItem extends StatelessWidget {
   final ItineraryCard itineraryCard;
@@ -11,14 +12,23 @@ class ItineraryItem extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: 12),
       padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(color: Color(0xFFF6F3ED)),
+      decoration: BoxDecoration(
+        color: Color(0xFFF6F3ED),
+        borderRadius: BorderRadius.circular(12),
+      ),
       child: Row(
         children: [
           Container(
             width: 60,
             height: 60,
-            decoration: BoxDecoration(color: Colors.grey[200]),
-            child: Image.asset(itineraryCard.imageUrl, fit: BoxFit.cover),
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.asset(itineraryCard.imageUrl, fit: BoxFit.cover),
+            ),
           ),
           SizedBox(width: 16),
           Expanded(
@@ -47,7 +57,12 @@ class ItineraryItem extends StatelessWidget {
             ),
           ),
           SizedBox(width: 8),
-          Icon(Icons.more_vert, color: Colors.black54),
+          IconButton(
+            icon: Icon(Icons.more_vert, color: Colors.black54),
+            onPressed: () {
+              showItineraryModal(context);
+            },
+          ),
         ],
       ),
     );
