@@ -1,8 +1,8 @@
-
 import 'package:cultureloop/screens/collection.dart';
 import 'package:cultureloop/screens/connexion.dart';
 import 'package:cultureloop/screens/detail.dart';
 import 'package:cultureloop/screens/home.dart';
+import 'package:cultureloop/screens/itinerary.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Culture Loop',
-     home: LoginPage(),
+     home: Itinerary(),
       routes: {
         '/login': (context) => const LoginPage(),
         '/home': (context) => const HomePage(),
