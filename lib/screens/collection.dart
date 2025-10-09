@@ -3,7 +3,7 @@ import 'package:cultureloop/widgets/header_section.dart';
 import 'package:cultureloop/widgets/navigation_bar_app.dart';
 import 'package:flutter/material.dart';
 
-class CollectionScreen extends StatelessWidget {
+class CollectionScreen extends StatefulWidget {
   final int departmentId;
   final String title;
 
@@ -14,43 +14,62 @@ class CollectionScreen extends StatelessWidget {
   });
 
   @override
+  State<CollectionScreen> createState() => _CollectionScreenState();
+}
+
+class _CollectionScreenState extends State<CollectionScreen> {
+  String searchQuery = '';
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
           HeaderSection(),
-          SizedBox(
-            height: 20,
-          ),
+          const SizedBox(height: 20),
           Text(
-            title,
+            widget.title,
             style: const TextStyle(
               fontSize: 17,
               fontWeight: FontWeight.w500,
               color: Colors.black87,
             ),
           ),
-          SizedBox(height: 20,),
-          TextField(
-            decoration: InputDecoration(
-              hintText: "Rechercher une œuvre...",
-              prefixIcon: const Icon(Icons.search),
-              filled: true,
-              fillColor: Colors.white70,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
+          const SizedBox(height: 20),
+
+          // Barre de recherche
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: TextField(
+              onChanged: (value) {
+                setState(() {
+                  searchQuery = value.toLowerCase();
+                });
+              },
+              decoration: InputDecoration(
+                hintText: "Rechercher une œuvre...",
+                prefixIcon: const Icon(Icons.search),
+                filled: true,
+                fillColor: Colors.white70,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide.none,
+                ),
               ),
             ),
           ),
-          SizedBox(height: 20,),
-          Expanded(
-            child: CollectionPage(departmentId: departmentId, title: title, ),
-          ),
+          const SizedBox(height: 20),
 
+          Expanded(
+            child: CollectionPage(
+              departmentId: widget.departmentId,
+              title: widget.title,
+              searchQuery: searchQuery,
+            ),
+          ),
         ],
       ),
-      bottomNavigationBar: NavigationBarApp()
+      bottomNavigationBar: NavigationBarApp(),
     );
   }
 }
