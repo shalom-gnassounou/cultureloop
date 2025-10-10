@@ -26,7 +26,7 @@ class _NavigationBarAppState extends State<NavigationBarApp> {
         print("Parcours cliqué (pas encore implémenté)");
         break;
       case 3:
-        print("Maps cliqué (pas encore implémenté)");
+        Navigator.pushNamed(context, '/maps');
         break;
     }
   }

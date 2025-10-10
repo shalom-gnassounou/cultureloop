@@ -36,6 +36,11 @@ dependencies:
   cupertino_icons: ^1.0.8
   readmore: ^3.0.0
   http: ^1.5.0
+  webview_flutter: ^4.13.0
+  dio: ^5.9.0
+  path_provider: ^2.1.5
+  permission_handler: ^12.0.1
+  image_picker: ^1.2.0
 
 dev_dependencies:
   flutter_test:
