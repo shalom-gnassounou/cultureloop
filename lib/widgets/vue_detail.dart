@@ -1,7 +1,7 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -120,7 +120,18 @@ class VueDetail extends StatelessWidget {
               ),
               IconButton(
                 icon: const Icon(Icons.photo_camera, size: 30),
-                onPressed: () {},
+                onPressed: () async {
+                  final ImagePicker picker = ImagePicker();
+                  final XFile? photo = await picker.pickImage(source: ImageSource.camera);
+                  if (photo != null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Photo prise avec succès !')),
+                    );
+                    }else{
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Aucune photo prise.')),
+                      );}
+                }
               ),
               IconButton(
                 icon: const Icon(Icons.border_color, size: 30),
