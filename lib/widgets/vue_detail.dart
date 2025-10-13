@@ -5,8 +5,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../controller/parcour_controller.dart';
+
 class VueDetail extends StatelessWidget {
-  const VueDetail({super.key});
+ VueDetail({super.key});
+  final ParcoursController parcoursController = ParcoursController();
 
   Future<void> downloadImage(BuildContext context, String imageUrl, String title) async {
     try {
@@ -56,6 +59,7 @@ class VueDetail extends StatelessWidget {
     final String dimensions = object['dimensions'] ?? '';
     final String period = object['period'] ?? '';
     final String objectDate = object['objectDate'] ?? '';
+
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
@@ -152,8 +156,12 @@ class VueDetail extends StatelessWidget {
               IconButton(
                 icon: Icon(Icons.bookmark_border),
                 onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Oeuvre enregistrée dans votre parcours !')),
+                  parcoursController.saveArtwork(
+                    context: context,
+                    title: title,
+                    imageUrl: imageUrl,
+                    artist: artistDisplayName,
+                    date: objectDate
                   );
 
                 },
