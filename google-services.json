@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "967698205989",
+    "project_id": "culture-loop",
+    "storage_bucket": "culture-loop.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967698205989:android:4508e36e32c5dfb0121ecc",
+        "android_client_info": {
+          "package_name": "com.example.cultureloop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "967698205989-ej6aea80c5d8svvjtvnq1ot500dogkdv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cultureloop",
+            "certificate_hash": "b62d3a2c83e1db52318c558c49840416c7c96852"
+          }
+        },
+        {
+          "client_id": "967698205989-a7rdmp9f975hs91nojo348jukks671gt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkJsj60g9m1fA_Yj_xSAxWdKkTPJkK170"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "967698205989-a7rdmp9f975hs91nojo348jukks671gt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "967698205989-t0lc7lph2vh7edg5lg50g581s4spbp2h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.cultureloop"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

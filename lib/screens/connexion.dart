@@ -1,11 +1,14 @@
 import 'package:cultureloop/screens/home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:local_auth/local_auth.dart';
-import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
+import '../controller/user_controller.dart';
+
+
+
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key,this.clientId});
-  final String clientId;
+  const LoginPage({super.key});
+
 
 
   @override
@@ -56,41 +59,41 @@ class _LoginPageState extends State<LoginPage> {
                SizedBox(height: 50),
 
               GestureDetector(
-                onTap: () async {
-                  final LocalAuthentication auth = LocalAuthentication();
-                  final List<BiometricType> availableBiometrics =
-                  await auth.getAvailableBiometrics();
-                  if (availableBiometrics.contains(BiometricType.strong) ||
-                      availableBiometrics.contains(BiometricType.face)) {
-                    bool authenticated = false;
-                    try {
-                      authenticated = await auth.authenticate(
-                        localizedReason:
-                        "Veuillez vous identifier avec votre empreinte",
-                        options: const AuthenticationOptions(
-                          biometricOnly: true,
-                          stickyAuth: true,
-                        ),
-                      );
-                    } catch (e) {
-                      print("Erreur d'authentification: $e");
-                    }
-                    setState(() {
-                      _message = authenticated
-                          ? "Authentification réussie !"
-                          : "Échec de l'authentification";
-                    });
+               // onTap: () async {
+                  //final LocalAuthentication auth = LocalAuthentication();
+                  //final List<BiometricType> availableBiometrics =
+                  //await auth.getAvailableBiometrics();
+                  //if (availableBiometrics.contains(BiometricType.strong) ||
+                     // availableBiometrics.contains(BiometricType.face)) {
+                   // bool authenticated = false;
+                   // try {
+                     // authenticated = await auth.authenticate(
+                       // localizedReason:
+                       // "Veuillez vous identifier avec votre empreinte",
+                        //options: const AuthenticationOptions(
+                         // biometricOnly: true,
+                         // stickyAuth: true,
+                       // ),
+                     // );
+                    //} catch (e) {
+                      //print("Erreur d'authentification: $e");
+                    //}
+                    //setState(() {
+                      //_message = authenticated
+                          //? "Authentification réussie !"
+                         // : "Échec de l'authentification";
+                    //});
 
-                    if (authenticated) {
+                   // if (authenticated) {
                       // Navigator.pushReplacement(...) si tu veux passer à la page suivante
-                    }
-                  } else {
-                    setState(() {
-                      _message =
-                      "Aucun capteur biométrique compatible disponible !";
-                    });
-                  }
-                },
+                   // }
+                 // } else {
+                    //setState(() {
+                      //_message =
+                      //"Aucun capteur biométrique compatible disponible !";
+                    //});
+                  //}
+                //},
                 child: Container(
                   padding: const EdgeInsets.all(25),
                   decoration: BoxDecoration(
@@ -114,12 +117,21 @@ class _LoginPageState extends State<LoginPage> {
               ),
               SizedBox(height: 40,),
               ElevatedButton.icon(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (context) => const HomePage(),
-                    ),
-                  );
+                onPressed: () async {
+                  try {
+                    final user = await UserController().loginwithGoogle();
+                    if(user != null && mounted){
+                      Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                          builder: (context) => const HomePage(),
+                        ),
+                      );
+
+                    }
+                  } on FirebaseAuthException catch (e) {
+                    print("Erreur d'authentification: $e");
+                  };
+
                 },
                 icon: Image.asset("assets/Google.svg.png",height: 24,),
                 label: Text("Connexion avec google"),
@@ -140,6 +152,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: 20,),
               ElevatedButton.icon(
                 onPressed: () {
+
                   Navigator.of(context).push(
                     MaterialPageRoute<void>(
                       builder: (context) => const HomePage(),
@@ -163,12 +176,21 @@ class _LoginPageState extends State<LoginPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             ElevatedButton.icon(
-                              onPressed: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute<void>(
-                                    builder: (context) => const HomePage(),
-                                  ),
-                                );
+                              onPressed: () async {
+                                try {
+                                  final user = await UserController().loginwithGoogle();
+                                  if(user != null && mounted){
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute<void>(
+                                        builder: (context) => const HomePage(),
+                                      ),
+                                    );
+
+                                  }
+
+                                }on FirebaseAuthException catch (e) {
+                                  print("Erreur d'authentification: $e");
+                                };
                               },
                               icon: Image.asset("assets/Google.svg.png", height: 24),
                               label: const Text("Inscription avec Google"),
