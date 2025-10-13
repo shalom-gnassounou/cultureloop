@@ -121,16 +121,16 @@ class VueDetail extends StatelessWidget {
               IconButton(
                 icon: const Icon(Icons.photo_camera, size: 30),
                 onPressed: () async {
-                  final ImagePicker picker = ImagePicker();
-                  final XFile? photo = await picker.pickImage(source: ImageSource.camera);
-                  if (photo != null) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Photo prise avec succès !')),
-                    );
-                    }else{
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Aucune photo prise.')),
-                      );}
+                  //final ImagePicker picker = ImagePicker();
+                  //final XFile? photo = await picker.pickImage(source: ImageSource.camera);
+                  //if (photo != null) {
+                    //ScaffoldMessenger.of(context).showSnackBar(
+                      //SnackBar(content: Text('Photo prise avec succès !')),
+                    //);
+                    //}else{
+                      //ScaffoldMessenger.of(context).showSnackBar(
+                        //const SnackBar(content: Text('Aucune photo prise.')),
+                      //);}
                 }
               ),
               IconButton(
