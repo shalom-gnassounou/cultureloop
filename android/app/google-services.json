@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "967698205989",
+    "project_id": "culture-loop",
+    "storage_bucket": "culture-loop.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967698205989:android:4508e36e32c5dfb0121ecc",
+        "android_client_info": {
+          "package_name": "com.example.cultureloop"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkJsj60g9m1fA_Yj_xSAxWdKkTPJkK170"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

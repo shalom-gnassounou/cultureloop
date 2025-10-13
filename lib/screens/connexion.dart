@@ -1,9 +1,12 @@
 import 'package:cultureloop/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  const LoginPage({super.key,this.clientId});
+  final String clientId;
+
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -124,6 +127,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: 20,),
               ElevatedButton.icon(
                 onPressed: () {
+
                   Navigator.of(context).push(
                     MaterialPageRoute<void>(
                       builder: (context) => const HomePage(),
