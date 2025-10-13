@@ -13,7 +13,7 @@ class Itinerary extends StatelessWidget {
     // Liste temporaire, il faut la remplacer par notre api
     final List<ItineraryCard> itineraryCards = List.generate(
       10,
-          (index) => ItineraryCard(
+      (index) => ItineraryCard(
         name: 'Kiyohara Yukinobu',
         department: 'Asian Art',
         imageUrl: 'assets/images/photos/AfricanArt.jpg',
@@ -41,7 +41,10 @@ class Itinerary extends StatelessWidget {
                         vertical: 24,
                         horizontal: 24,
                       ),
-                      decoration: BoxDecoration(color: Color(0xFFF6F3ED)),
+                      decoration: BoxDecoration(
+                        color: Color(0xFFF6F3ED),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -49,10 +52,11 @@ class Itinerary extends StatelessWidget {
                             padding: EdgeInsets.all(4),
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.black, width: 2),
+                              borderRadius: BorderRadius.circular(8),
                             ),
                             child: Icon(Icons.add, size: 24),
                           ),
-                          SizedBox(width: 8),
+                          SizedBox(width: 12),
                           Flexible(
                             child: Text(
                               'Add to this playlist',
@@ -66,7 +70,7 @@ class Itinerary extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(height: 16),
+                    SizedBox(height: 4),
                     ListView.builder(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
