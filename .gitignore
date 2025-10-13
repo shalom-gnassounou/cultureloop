@@ -67,4 +67,4 @@ macos/Flutter/GeneratedPluginRegistrant.swift
 # Others
 *.log
 *.tmp
-
+*.lock

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'itinerary_card.dart';
 
-void showItineraryModal(BuildContext context) {
+void showItineraryModal(BuildContext context, ItineraryCard itineraryCard) {
   showModalBottomSheet(
     context: context,
     shape: RoundedRectangleBorder(
@@ -9,8 +10,11 @@ void showItineraryModal(BuildContext context) {
     builder: (BuildContext context) {
       return Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Wrap(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
+            itineraryCard.buildDisplay(showMoreButton: false),
+            SizedBox(height: 16),
             ListTile(
               leading: Icon(Icons.share),
               title: Text('Share'),
