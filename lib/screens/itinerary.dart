@@ -1,3 +1,5 @@
+import 'package:cultureloop/controller/parcour_controller.dart';
+import 'package:cultureloop/service/model/art_work.dart';
 import 'package:cultureloop/widgets/category.dart';
 import 'package:cultureloop/widgets/header_section.dart';
 import 'package:cultureloop/widgets/itinerary_item.dart';
@@ -5,20 +7,16 @@ import 'package:cultureloop/widgets/itinerary_card.dart';
 import 'package:flutter/material.dart';
 import '../widgets/navigation_bar_app.dart';
 
+
+
 class Itinerary extends StatelessWidget {
   const Itinerary({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Liste temporaire, il faut la remplacer par notre api
-    final List<ItineraryCard> itineraryCards = List.generate(
-      10,
-      (index) => ItineraryCard(
-        name: 'Kiyohara Yukinobu',
-        department: 'Asian Art',
-        imageUrl: 'assets/images/photos/AfricanArt.jpg',
-      ),
-    );
+
+    final ParcoursController parcoursController = ParcoursController();
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -70,14 +68,45 @@ class Itinerary extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(height: 4),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: itineraryCards.length,
-                      itemBuilder: (context, index) {
-                        return ItineraryItem(
-                          itineraryCard: itineraryCards[index],
+
+                    SizedBox(height: 12),
+                    FutureBuilder<List<ArtWork>>(
+                      future: parcoursController.getParcours(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return Center(child: CircularProgressIndicator());
+                        }
+
+                        if (snapshot.hasError) {
+                          return Text('Erreur : ${snapshot.error}');
+                        }
+
+                        final itineraries = snapshot.data ?? [];
+
+                        if (itineraries.isEmpty) {
+                          return Padding(
+                            padding: const EdgeInsets.only(top: 24.0),
+                            child: Text(
+                              'Aucun parcours enregistré pour le moment.',
+                              style: TextStyle(color: Colors.grey[700]),
+                            ),
+                          );
+                        }
+
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: itineraries.length,
+                          itemBuilder: (context, index) {
+                            final itinerary = itineraries[index];
+                            final card = ItineraryCard(
+                             name: itinerary.title,
+                              date: itinerary.date,
+                              imageUrl: itinerary.imageUrl,
+
+                            );
+                            return ItineraryItem(itineraryCard: card);
+                          },
                         );
                       },
                     ),
