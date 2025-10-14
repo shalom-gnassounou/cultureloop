@@ -3,6 +3,8 @@ import 'package:cultureloop/screens/connexion.dart';
 import 'package:cultureloop/screens/detail.dart';
 import 'package:cultureloop/screens/home.dart';
 import 'package:cultureloop/screens/itinerary.dart';
+import 'package:cultureloop/screens/maps.dart';
+import 'package:cultureloop/screens/user_profile_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
