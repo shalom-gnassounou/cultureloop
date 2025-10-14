@@ -4,6 +4,7 @@ import 'package:cultureloop/screens/detail.dart';
 import 'package:cultureloop/screens/home.dart';
 import 'package:cultureloop/screens/itinerary.dart';
 import 'package:cultureloop/screens/maps.dart';
+import 'package:cultureloop/screens/user_profile_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Culture Loop',
-     home: LoginPage(),
+     home: UserProfilePage(),
       routes: {
         '/login': (context) => const LoginPage(),
         '/home': (context) => const HomePage(),
