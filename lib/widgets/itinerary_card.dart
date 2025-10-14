@@ -3,13 +3,16 @@ import 'itinerary_modal.dart';
 
 class ItineraryCard {
   final String name;
-  final String department;
+  final String date;
   final String imageUrl;
+
+
 
   ItineraryCard({
     required this.name,
-    required this.department,
+    required this.date,
     required this.imageUrl,
+
   });
 
   Widget buildDisplay({bool showMoreButton = false}) {
@@ -50,7 +53,7 @@ class ItineraryDisplay extends StatelessWidget {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: Image.asset(itineraryCard.imageUrl, fit: BoxFit.cover),
+              child: Image.network(itineraryCard.imageUrl, fit: BoxFit.cover),
             ),
           ),
           SizedBox(width: 16),
@@ -69,12 +72,7 @@ class ItineraryDisplay extends StatelessWidget {
                   maxLines: 1,
                 ),
                 SizedBox(height: 4),
-                Text(
-                  'department: ${itineraryCard.department}',
-                  style: TextStyle(fontSize: 14, color: Colors.black87),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                ),
+                //
               ],
             ),
           ),

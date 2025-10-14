@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-
 import '../controller/parcour_controller.dart';
+
 
 class VueDetail extends StatelessWidget {
  VueDetail({super.key});
@@ -125,16 +125,16 @@ class VueDetail extends StatelessWidget {
               IconButton(
                 icon: const Icon(Icons.photo_camera, size: 30),
                 onPressed: () async {
-                  //final ImagePicker picker = ImagePicker();
-                  //final XFile? photo = await picker.pickImage(source: ImageSource.camera);
-                  //if (photo != null) {
-                    //ScaffoldMessenger.of(context).showSnackBar(
-                      //SnackBar(content: Text('Photo prise avec succès !')),
-                    //);
-                    //}else{
-                      //ScaffoldMessenger.of(context).showSnackBar(
-                        //const SnackBar(content: Text('Aucune photo prise.')),
-                      //);}
+                  final ImagePicker picker = ImagePicker();
+                  final XFile? photo = await picker.pickImage(source: ImageSource.camera);
+                  if (photo != null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Photo prise avec succès !')),
+                    );
+                    }else{
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Aucune photo prise.')),
+                      );}
                 }
               ),
               IconButton(
@@ -161,9 +161,8 @@ class VueDetail extends StatelessWidget {
                     title: title,
                     imageUrl: imageUrl,
                     artist: artistDisplayName,
-                    date: objectDate
+                    date: objectDate,
                   );
-
                 },
               ),
             ],
@@ -199,6 +198,7 @@ class VueDetail extends StatelessWidget {
           _buildInfoBlock('Medium', medium),
           _buildInfoBlock('Dimensions', dimensions),
           _buildInfoBlock('Période', period),
+
           const SizedBox(height: 36),
           Row(
             children: const [

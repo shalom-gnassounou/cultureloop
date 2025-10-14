@@ -37,10 +37,15 @@ class HeaderSection extends StatelessWidget {
               ),
             ],
           ),
-          CircleAvatar(
-            child: Image.asset(
-              'assets/images/pictos/avatar.png',
-              fit: BoxFit.cover,
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, '/profile');
+            },
+            child: CircleAvatar(
+              child: Image.asset(
+                'assets/images/pictos/avatar.png',
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ],
