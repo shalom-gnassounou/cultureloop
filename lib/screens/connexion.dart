@@ -1,6 +1,7 @@
 import 'package:cultureloop/screens/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:local_auth/local_auth.dart';
 
 import '../controller/user_controller.dart';
 
@@ -55,41 +56,44 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: 50),
 
               GestureDetector(
-                // onTap: () async {
-                //final LocalAuthentication auth = LocalAuthentication();
-                //final List<BiometricType> availableBiometrics =
-                //await auth.getAvailableBiometrics();
-                //if (availableBiometrics.contains(BiometricType.strong) ||
-                // availableBiometrics.contains(BiometricType.face)) {
-                // bool authenticated = false;
-                // try {
-                // authenticated = await auth.authenticate(
-                // localizedReason:
-                // "Veuillez vous identifier avec votre empreinte",
-                //options: const AuthenticationOptions(
-                // biometricOnly: true,
-                // stickyAuth: true,
-                // ),
-                // );
-                //} catch (e) {
-                //print("Erreur d'authentification: $e");
-                //}
-                //setState(() {
-                //_message = authenticated
-                //? "Authentification réussie !"
-                // : "Échec de l'authentification";
-                //});
+                 onTap: () async {
+                final LocalAuthentication auth = LocalAuthentication();
+                final List<BiometricType> availableBiometrics =
+                await auth.getAvailableBiometrics();
+                if (availableBiometrics.contains(BiometricType.strong) ||
+                 availableBiometrics.contains(BiometricType.face)) {
+                bool authenticated = false;
+                 try {
+                 authenticated = await auth.authenticate(
+                 localizedReason:
+                 "Veuillez vous identifier avec votre empreinte",
+                   options: const AuthenticationOptions(
+                 biometricOnly: true,
+                 stickyAuth: true,
+                 ),
+                 );
+                } catch (e) {
+                print("Erreur d'authentification: $e");
+                }
+                setState(() {
+                _message = authenticated
+                ? "Authentification réussie !"
+                 : "Échec de l'authentification";
+                });
 
-                // if (authenticated) {
-                // Navigator.pushReplacement(...) si tu veux passer à la page suivante
-                // }
-                // } else {
-                //setState(() {
-                //_message =
-                //"Aucun capteur biométrique compatible disponible !";
-                //});
-                //}
-                //},
+                 if (authenticated) {
+                   Navigator.of(context).push(
+                       MaterialPageRoute<void>(
+                         builder: (context) => const HomePage(),
+                       ),);
+                       }
+                 } else {
+                setState(() {
+                _message =
+                "Aucun capteur biométrique compatible disponible !";
+                   });
+                }
+                },
                 child: Container(
                   padding: const EdgeInsets.all(25),
                   decoration: BoxDecoration(

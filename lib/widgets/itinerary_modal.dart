@@ -1,5 +1,8 @@
+import 'package:cultureloop/controller/parcour_controller.dart';
 import 'package:flutter/material.dart';
 import 'itinerary_card.dart';
+
+
 
 void showItineraryModal(BuildContext context, ItineraryCard itineraryCard) {
   showModalBottomSheet(
@@ -33,7 +36,9 @@ void showItineraryModal(BuildContext context, ItineraryCard itineraryCard) {
               leading: Icon(Icons.remove_circle_outline),
               title: Text('Remove from this playlist'),
               onTap: () {
+                ParcoursController().deleteArtwork(itineraryCard.name,context);
                 Navigator.pop(context);
+
               },
             ),
             ListTile(
