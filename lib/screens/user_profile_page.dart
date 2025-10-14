@@ -24,7 +24,7 @@ class UserProfilePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
+              Container(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
@@ -124,185 +124,9 @@ class UserProfilePage extends StatelessWidget {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        padding: EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: Color(0xFFF6F3ED),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Column(
-                          children: [
-                            Text(
-                              '$photosCount',
-                              style: TextStyle(
-                                fontSize: 28,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black,
-                              ),
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              'Photos',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.black87,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 12),
-                    Expanded(
-                      child: Container(
-                        padding: EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: Color(0xFFF6F3ED),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Column(
-                          children: [
-                            Text(
-                              '$playlistsCount',
-                              style: TextStyle(
-                                fontSize: 28,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black,
-                              ),
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              'Other playlists',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.black87,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 12),
-                    Expanded(
-                      child: Container(
-                        padding: EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: Color(0xFFF6F3ED),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Column(
-                          children: [
-                            Text(
-                              '$commentsCount',
-                              style: TextStyle(
-                                fontSize: 28,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black,
-                              ),
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              'Comments',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.black87,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
               SizedBox(height: 24),
-
-              // Section Photos added
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Photos added',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        // Navigation vers la galerie complète
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Navigate to full photo gallery'),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        'See all',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Color(0xFFC6A169),
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              SizedBox(height: 12),
-
-              // Photos grid
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: 110,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFD9D9D9),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 12),
-                    Expanded(
-                      child: Container(
-                        height: 110,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFD9D9D9),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 12),
-                    Expanded(
-                      child: Container(
-                        height: 110,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFD9D9D9),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              SizedBox(height: 24),
-
-              // Section Other playlists
-              Padding(
+              // Other playlists
+              Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -335,7 +159,7 @@ class UserProfilePage extends StatelessWidget {
               SizedBox(height: 12),
 
               // Playlist items
-              Padding(
+              Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Column(
                   children: [
@@ -355,11 +179,9 @@ class UserProfilePage extends StatelessWidget {
                   ],
                 ),
               ),
-
               SizedBox(height: 24),
-
               // Section Comments
-              Padding(
+              Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -386,14 +208,12 @@ class UserProfilePage extends StatelessWidget {
                   ],
                 ),
               ),
-
               SizedBox(height: 12),
-
               // Comment input
-              Padding(
+              Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 4),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black26),
                     borderRadius: BorderRadius.circular(25),
@@ -414,14 +234,13 @@ class UserProfilePage extends StatelessWidget {
                   ),
                 ),
               ),
-
               SizedBox(height: 16),
-
               // Comment item
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Container(
-                  padding: EdgeInsets.all(16),
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.all(16),  //
                   decoration: BoxDecoration(
                     color: Color(0xFFF6F3ED),
                     borderRadius: BorderRadius.circular(12),
@@ -455,7 +274,6 @@ class UserProfilePage extends StatelessWidget {
                   ),
                 ),
               ),
-
               SizedBox(height: 80),
             ],
           ),
@@ -466,11 +284,11 @@ class UserProfilePage extends StatelessWidget {
   }
 
   Widget _buildPlaylistItem(
-    BuildContext context,
-    String title,
-    String subtitle,
-    String date,
-  ) {
+      BuildContext context,
+      String title,
+      String subtitle,
+      String date,
+      ) {
     return GestureDetector(
       onTap: () {
         ScaffoldMessenger.of(
