@@ -1,5 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:cultureloop/widgets/navigation_bar_app.dart';
+
 
 class UserProfilePage extends StatelessWidget {
   final String userName;
@@ -49,9 +51,7 @@ class UserProfilePage extends StatelessWidget {
                                     ),
                                     TextButton(
                                       onPressed: () {
-                                        Navigator.pop(context);
-                                        // Ajouter ici la logique de déconnexion
-                                        // Navigator.pushReplacementNamed(context, '/login');
+                                        Navigator.popAndPushNamed(context, '/login');
                                       },
                                       child: Text(
                                         'Logout',
@@ -132,7 +132,7 @@ class UserProfilePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Other playlists',
+                      'Other itenararies',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
@@ -143,7 +143,7 @@ class UserProfilePage extends StatelessWidget {
                       onTap: () {
                         // Ajouter une nouvelle playlist
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Add new playlist')),
+                          SnackBar(content: Text('Add a new itenarary')),
                         );
                       },
                       child: Icon(

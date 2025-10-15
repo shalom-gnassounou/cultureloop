@@ -47,7 +47,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
                 });
               },
               decoration: InputDecoration(
-                hintText: "Rechercher une œuvre...",
+                hintText: "Looking for a piece of art?",
                 prefixIcon: const Icon(Icons.search),
                 filled: true,
                 fillColor: Colors.white70,

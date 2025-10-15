@@ -129,11 +129,11 @@ class VueDetail extends StatelessWidget {
                   final XFile? photo = await picker.pickImage(source: ImageSource.camera);
                   if (photo != null) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Photo prise avec succès !')),
+                      SnackBar(content: Text('Picture taken !')),
                     );
                     }else{
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Aucune photo prise.')),
+                        const SnackBar(content: Text('No picture taken.')),
                       );}
                 }
               ),
@@ -148,7 +148,7 @@ class VueDetail extends StatelessWidget {
                     downloadImage(context, imageUrl, title);
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Aucune image à télécharger.")),
+                      const SnackBar(content: Text("No image to download.")),
                     );
                   }
                 },
@@ -162,6 +162,7 @@ class VueDetail extends StatelessWidget {
                     imageUrl: imageUrl,
                     artist: artistDisplayName,
                     date: objectDate,
+                    department: department,
                   );
                 },
               ),
@@ -194,10 +195,11 @@ class VueDetail extends StatelessWidget {
           const SizedBox(height: 16),
           _buildInfoBlock('Classification', classification),
           _buildInfoBlock('Date', objectDate),
-          _buildInfoBlock("Année d'acquisition", accessionYear),
+          _buildInfoBlock("Accession Year", accessionYear),
           _buildInfoBlock('Medium', medium),
           _buildInfoBlock('Dimensions', dimensions),
-          _buildInfoBlock('Période', period),
+          _buildInfoBlock('Period', period),
+          _buildInfoBlock('Department', department),
 
           const SizedBox(height: 36),
           Row(
@@ -228,7 +230,7 @@ class VueDetail extends StatelessWidget {
                     color: Colors.white,
                     child: const Center(
                       child: Text(
-                        "Zone de dessin",
+                        "Drawing",
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.grey),
                       ),

@@ -69,7 +69,7 @@ class _CollectionPageState extends State<CollectionPage> {
         : objects.isEmpty
         ? const Center(
             child: Text(
-              'Aucune œuvre trouvée',
+              'Nothing found',
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
           )
@@ -79,7 +79,7 @@ class _CollectionPageState extends State<CollectionPage> {
             itemCount: objects.length,
             itemBuilder: (context, index) {
               final object = objects[index];
-              final String title = object['title'] ?? 'Titre inconnu';
+              final String title = object['title'] ?? 'Unknown title';
               final String imageUrl = object['primaryImageSmall'] ?? '';
 
               return Container(
@@ -123,7 +123,7 @@ class _CollectionPageState extends State<CollectionPage> {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  subtitle: const Text("Détails de l'œuvre"),
+                  subtitle: const Text("See more"),
                   onTap: () {
                     Navigator.pushNamed(context, '/detail', arguments: object);
                   },

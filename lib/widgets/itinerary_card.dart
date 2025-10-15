@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
+
 import 'itinerary_modal.dart';
 
 class ItineraryCard {
   final String name;
   final String date;
   final String imageUrl;
-
-
+  final String departement;
 
   ItineraryCard({
     required this.name,
     required this.date,
     required this.imageUrl,
-
+    required this.departement,
   });
 
   Widget buildDisplay({bool showMoreButton = false}) {
@@ -71,8 +71,15 @@ class ItineraryDisplay extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                 ),
+                Text(
+                  itineraryCard.departement,
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xFFC6A169),
+                  ),
+                ),
                 SizedBox(height: 4),
-                //
               ],
             ),
           ),
