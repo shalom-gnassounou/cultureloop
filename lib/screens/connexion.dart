@@ -1,9 +1,10 @@
 import 'package:cultureloop/screens/home.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cultureloop/widgets/modal_inscription.dart';
+import 'package:cultureloop/widgets/login_button_apple.dart';
+import 'package:cultureloop/widgets/login_button_face_book.dart';
+import 'package:cultureloop/widgets/login_button_google.dart';
 import 'package:flutter/material.dart';
 import 'package:local_auth/local_auth.dart';
-
-import '../controller/user_controller.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -56,43 +57,44 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: 50),
 
               GestureDetector(
-                 onTap: () async {
-                final LocalAuthentication auth = LocalAuthentication();
-                final List<BiometricType> availableBiometrics =
-                await auth.getAvailableBiometrics();
-                if (availableBiometrics.contains(BiometricType.strong) ||
-                 availableBiometrics.contains(BiometricType.face)) {
-                bool authenticated = false;
-                 try {
-                 authenticated = await auth.authenticate(
-                 localizedReason:
-                 "Veuillez vous identifier avec votre empreinte",
-                   options: const AuthenticationOptions(
-                 biometricOnly: true,
-                 stickyAuth: true,
-                 ),
-                 );
-                } catch (e) {
-                print("Erreur d'authentification: $e");
-                }
-                setState(() {
-                _message = authenticated
-                ? "Authentification réussie !"
-                 : "Échec de l'authentification";
-                });
+                onTap: () async {
+                  final LocalAuthentication auth = LocalAuthentication();
+                  final List<BiometricType> availableBiometrics = await auth
+                      .getAvailableBiometrics();
+                  if (availableBiometrics.contains(BiometricType.strong) ||
+                      availableBiometrics.contains(BiometricType.face)) {
+                    bool authenticated = false;
+                    try {
+                      authenticated = await auth.authenticate(
+                        localizedReason:
+                            "Veuillez vous identifier avec votre empreinte",
+                        options: const AuthenticationOptions(
+                          biometricOnly: true,
+                          stickyAuth: true,
+                        ),
+                      );
+                    } catch (e) {
+                      print("Erreur d'authentification: $e");
+                    }
+                    setState(() {
+                      _message = authenticated
+                          ? "Authentification réussie !"
+                          : "Échec de l'authentification";
+                    });
 
-                 if (authenticated) {
-                   Navigator.of(context).push(
-                       MaterialPageRoute<void>(
-                         builder: (context) => const HomePage(),
-                       ),);
-                       }
-                 } else {
-                setState(() {
-                _message =
-                "Aucun capteur biométrique compatible disponible !";
-                   });
-                }
+                    if (authenticated) {
+                      Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                          builder: (context) => const HomePage(),
+                        ),
+                      );
+                    }
+                  } else {
+                    setState(() {
+                      _message =
+                          "Aucun capteur biométrique compatible disponible !";
+                    });
+                  }
                 },
                 child: Container(
                   padding: const EdgeInsets.all(25),
@@ -118,163 +120,19 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 height: 40,
               ),
-              ElevatedButton.icon(
-                onPressed: () async {
-                  try {
-                    final user = await UserController().loginwithGoogle();
-                    if (user != null && mounted) {
-                      Navigator.of(context).push(
-                        MaterialPageRoute<void>(
-                          builder: (context) => const HomePage(),
-                        ),
-                      );
-                    }
-                  } on FirebaseAuthException catch (e) {
-                    print("Erreur d'authentification: $e");
-                  }
-                  ;
-                },
-                icon: Image.asset(
-                  "assets/Google.svg.png",
-                  height: 24,
-                ),
-                label: Text("Connexion avec google"),
-              ),
+              LoginButton(mounted: mounted),
               SizedBox(
                 height: 20,
               ),
-              ElevatedButton.icon(
-                onPressed: () async {
-                 try {
-                   final user = await UserController().loginwithFacebook();
-                   if (user != null && mounted) {
-                     Navigator.of(context).push(
-                       MaterialPageRoute<void>(
-                         builder: (context) => const HomePage(),
-                       ),
-                     );
-                   }
-                 }on FirebaseAuthException catch (e) {
-                   print("Erreur d'authentification: $e");
-                 };
-                },
-                icon: Icon(Icons.facebook),
-                label: Text("Connexion avec facebook"),
-              ),
+              LoginButtonFaceBook(mounted: mounted),
               SizedBox(
                 height: 20,
               ),
-              ElevatedButton.icon(
-                onPressed: () async {
-                  try {
-                    final user = await UserController().loginwithApple();
-                    if (user != null && mounted) {
-                      Navigator.of(context).push(
-                        MaterialPageRoute<void>(
-                          builder: (context) => const HomePage(),
-                        ),
-                      );
-                    }
-                  } on FirebaseAuthException catch (e) {
-                    print("Erreur d'authentification: $e");
-                  };
-                },
-                icon: Icon(Icons.apple),
-                label: Text("Connexion avec apple"),
+              LoginButtonApple(mounted: mounted),
+              SizedBox(
+                height: 30,
               ),
-              ElevatedButton(
-                onPressed: () {
-                  showModalBottomSheet(
-                    context: context,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(20),
-                      ),
-                    ),
-                    builder: (BuildContext context) {
-                      return SizedBox(
-                        height: 300,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton.icon(
-                              onPressed: () async {
-                                try {
-                                  final user = await UserController()
-                                      .loginwithGoogle();
-                                  if (user != null && mounted) {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute<void>(
-                                        builder: (context) => const HomePage(),
-                                      ),
-                                    );
-                                  }
-                                } on FirebaseAuthException catch (e) {
-                                  print("Erreur d'authentification: $e");
-                                }
-
-                              },
-                              icon: Image.asset(
-                                "assets/Google.svg.png",
-                                height: 24,
-                              ),
-                              label: const Text("Inscription avec Google"),
-                            ),
-                            SizedBox(height: 20),
-                            ElevatedButton.icon(
-                              onPressed: () async {
-                                try {
-                                  final user = await UserController().loginwithFacebook();
-                                  if (user != null && mounted) {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute<void>(
-                                        builder: (context) => const HomePage(),
-                                      ),
-                                    );
-                                  }
-                                }on FirebaseAuthException catch (e) {
-                                  print("Erreur d'authentification: $e");
-                                };
-                              },
-                              icon: Icon(Icons.facebook),
-                              label: const Text("Inscription avec Facebook"),
-                            ),
-                            SizedBox(height: 20),
-                            ElevatedButton.icon(
-                              onPressed: () async {
-                                try {
-                                  final user = await UserController().loginwithApple();
-                                  if (user != null && mounted) {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute<void>(
-                                        builder: (context) => const HomePage(),
-                                      ),
-                                    );
-                                  }
-                                } on FirebaseAuthException catch (e) {
-                                  print("Erreur d'authentification: $e");
-                                };
-                                },
-                              icon: Icon(Icons.apple),
-                              label: const Text("Inscription avec Apple"),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: const Text("Fermer l'inscription"),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  );
-                },
-                child: const Text("Pas encore inscrit ?"),
-              ),
+              ModalInscription(mounted: mounted),
             ],
           ),
         ),
