@@ -1,5 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:cultureloop/widgets/navigation_bar_app.dart';
+
 
 class UserProfilePage extends StatelessWidget {
   final String userName;
@@ -49,9 +51,7 @@ class UserProfilePage extends StatelessWidget {
                                     ),
                                     TextButton(
                                       onPressed: () {
-                                        Navigator.pop(context);
-                                        // Ajouter ici la logique de déconnexion
-                                        // Navigator.pushReplacementNamed(context, '/login');
+                                        Navigator.popAndPushNamed(context, '/login');
                                       },
                                       child: Text(
                                         'Logout',

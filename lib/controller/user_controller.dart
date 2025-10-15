@@ -44,6 +44,13 @@ class UserController {
     }
     return auth.currentUser;
   }
+  Future<void> logout() async {
+    await GoogleSignIn().signOut();
+    await FacebookAuth.instance.logOut();
+    await FirebaseAuth.instance.signOut();
+
+  }
+
 
 
 }
