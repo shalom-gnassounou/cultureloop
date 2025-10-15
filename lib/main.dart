@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Culture Loop',
-     home: LoginPage(),
+     home: Detail(),
       routes: {
         '/login': (context) => const LoginPage(),
         '/home': (context) => const HomePage(),

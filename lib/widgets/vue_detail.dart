@@ -6,12 +6,21 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../controller/parcour_controller.dart';
 
+class VueDetail extends StatefulWidget {
+  const VueDetail({super.key});
 
-class VueDetail extends StatelessWidget {
- VueDetail({super.key});
+  @override
+  State<VueDetail> createState() => _VueDetailState();
+}
+
+class _VueDetailState extends State<VueDetail> {
   final ParcoursController parcoursController = ParcoursController();
 
-  Future<void> downloadImage(BuildContext context, String imageUrl, String title) async {
+  Future<void> downloadImage(
+      BuildContext context,
+      String imageUrl,
+      String title,
+      ) async {
     try {
       var status = await Permission.storage.request();
       if (!status.isGranted) {
@@ -39,19 +48,18 @@ class VueDetail extends StatelessWidget {
     }
   }
 
-
-
-      @override
+  @override
   Widget build(BuildContext context) {
     final Map<String, dynamic> object =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>? ??
-        {};
+            {};
 
     final String title = object['title'] ?? 'Titre inconnu';
     final String imageUrl = object['primaryImage'] ?? '';
     final String creditLine = object['creditLine'] ?? '';
     final String department = object['department'] ?? '';
-    final String artistDisplayName = object['artistDisplayName'] ?? 'Artiste inconnu';
+    final String artistDisplayName =
+        object['artistDisplayName'] ?? 'Artiste inconnu';
     final String artistDisplayBio = object['artistDisplayBio'] ?? '';
     final String classification = object['classification'] ?? '';
     final String accessionYear = object['accessionYear'] ?? '';
@@ -59,7 +67,6 @@ class VueDetail extends StatelessWidget {
     final String dimensions = object['dimensions'] ?? '';
     final String period = object['period'] ?? '';
     final String objectDate = object['objectDate'] ?? '';
-
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
@@ -69,49 +76,43 @@ class VueDetail extends StatelessWidget {
           Center(
             child: Text(
               title,
-              style: const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w800,
-              ),
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800),
               textAlign: TextAlign.center,
             ),
           ),
           const SizedBox(height: 20),
           imageUrl.isNotEmpty
               ? ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image.network(
-                    imageUrl,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                    loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return Container(
-                        height: 300,
-                        alignment: Alignment.center,
-                        child: CircularProgressIndicator(
-                          value: loadingProgress.expectedTotalBytes != null
-                              ? loadingProgress.cumulativeBytesLoaded /
-                                    loadingProgress.expectedTotalBytes!
-                              : null,
-                        ),
-                      );
-                    },
-                  ),
-                )
-              : Container(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.network(
+              imageUrl,
+              width: double.infinity,
+              fit: BoxFit.cover,
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) return child;
+                return Container(
                   height: 300,
-                  color: Colors.grey[300],
-                  child: const Icon(Icons.image, size: 100),
-                ),
+                  alignment: Alignment.center,
+                  child: CircularProgressIndicator(
+                    value: loadingProgress.expectedTotalBytes != null
+                        ? loadingProgress.cumulativeBytesLoaded /
+                        loadingProgress.expectedTotalBytes!
+                        : null,
+                  ),
+                );
+              },
+            ),
+          )
+              : Container(
+            height: 300,
+            color: Colors.grey[300],
+            child: const Icon(Icons.image, size: 100),
+          ),
           const SizedBox(height: 8),
           if (creditLine.isNotEmpty)
             Text(
               creditLine,
-              style: const TextStyle(
-                fontSize: 10,
-                fontStyle: FontStyle.italic,
-              ),
+              style: const TextStyle(fontSize: 10, fontStyle: FontStyle.italic),
             ),
           const SizedBox(height: 16),
           const Divider(thickness: 1),
@@ -126,16 +127,19 @@ class VueDetail extends StatelessWidget {
                 icon: const Icon(Icons.photo_camera, size: 30),
                 onPressed: () async {
                   final ImagePicker picker = ImagePicker();
-                  final XFile? photo = await picker.pickImage(source: ImageSource.camera);
+                  final XFile? photo = await picker.pickImage(
+                    source: ImageSource.camera,
+                  );
                   if (photo != null) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Picture taken !')),
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text('Picture taken !')));
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('No picture taken.')),
                     );
-                    }else{
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('No picture taken.')),
-                      );}
-                }
+                  }
+                },
               ),
               IconButton(
                 icon: const Icon(Icons.border_color, size: 30),
@@ -173,10 +177,7 @@ class VueDetail extends StatelessWidget {
           if (department.isNotEmpty)
             Text(
               department,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w800,
-              ),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
             ),
           const SizedBox(height: 8),
           Text(
@@ -188,10 +189,7 @@ class VueDetail extends StatelessWidget {
             ),
           ),
           if (artistDisplayBio.isNotEmpty)
-            Text(
-              artistDisplayBio,
-              style: const TextStyle(fontSize: 16),
-            ),
+            Text(artistDisplayBio, style: const TextStyle(fontSize: 16)),
           const SizedBox(height: 16),
           _buildInfoBlock('Classification', classification),
           _buildInfoBlock('Date', objectDate),
@@ -206,51 +204,68 @@ class VueDetail extends StatelessWidget {
             children: const [
               Text(
                 "Paint",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w800,
-                ),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
               ),
               SizedBox(width: 8),
               Icon(Icons.border_color, size: 24),
             ],
           ),
           const SizedBox(height: 16),
-          Container(
-            width: double.infinity,
-            height: 400,
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey, width: 2),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Column(
-              children: [
-                Expanded(
-                  child: Container(
-                    color: Colors.white,
-                    child: const Center(
-                      child: Text(
-                        "Drawing",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.grey),
-                      ),
+          Column(
+            children: [
+              GestureDetector(
+                child: Container(
+                  width: double.infinity,
+                  height: 600,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey, width: 2),
+                    borderRadius: BorderRadius.circular(8), color: Colors.red,
+                  ),
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: 70,
+                color: Colors.white,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    IconButton(
+                      icon:Icon(Icons.edit,color:Colors.black),
+                      onPressed: (){
+                        setState(() {
+                          // Ajout logique ici
+                        });
+                      },
                     ),
-                  ),
+                    IconButton(
+                      icon:Icon(Icons.edit,color:Colors.red),
+                      onPressed: (){
+                        setState(() {
+                          // Ajout logique ici
+                        });
+                      },
+                    ),
+                    IconButton(
+                      icon:Icon(Icons.edit,color:Colors.blue),
+                      onPressed: (){
+                        setState(() {
+                          // Ajout logique ici
+                        });
+                      },
+                    ),
+                    IconButton(
+                      icon:Icon(Icons.edit,color:Colors.green),
+                      onPressed: (){
+                        setState(() {
+                          // Ajout logique ici
+                        });
+                      },
+                    ),
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: const [
-                      Icon(Icons.edit, size: 30, color: Colors.black),
-                      Icon(Icons.edit, size: 30, color: Colors.red),
-                      Icon(Icons.edit, size: 30, color: Colors.blue),
-                      Icon(Icons.edit, size: 30, color: Colors.green),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),
@@ -261,10 +276,7 @@ class VueDetail extends StatelessWidget {
     if (value.isEmpty) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
-      child: Text(
-        '$label: $value',
-        style: const TextStyle(fontSize: 14),
-      ),
+      child: Text('$label: $value', style: const TextStyle(fontSize: 14)),
     );
   }
 }
