@@ -14,6 +14,7 @@ class ParcoursController {
     required String imageUrl,
     required String artist,
     required String date,
+    required String department,
 
   }) async {
     final user = auth.currentUser;
@@ -36,11 +37,12 @@ class ParcoursController {
         'artist': artist,
         'date': date,
         'savedAt': DateTime.now(),
+        'department': department,
 
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Œuvre enregistrée dans votre parcours.')),
+        const SnackBar(content: Text('Add to your itenarary.')),
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -75,7 +77,7 @@ class ParcoursController {
   Future<void> deleteArtwork(String documentId, BuildContext context) async {
     final user = auth.currentUser;
     if (user == null) {
-      print("Aucun utilisateur connecté");
+      print("No user connected");
       return;
     }
     try {
@@ -85,7 +87,7 @@ class ParcoursController {
           .collection('parcours')
           .doc(documentId)
           .delete();
-      print("Objet supprimé avec succès");
+      print("ArtWork remove with success");
     } catch (e) {
       print("Erreur lors de la suppression de l'objet : $e");
     }

@@ -26,12 +26,12 @@ class LoginButtonApple extends StatelessWidget {
             );
           }
         } on FirebaseAuthException catch (e) {
-          print("Erreur d'authentification: $e");
+          print("Probleme with Apple login : $e");
         }
         ;
       },
       icon: Icon(Icons.apple),
-      label: Text("Connexion avec apple"),
+      label: Text("Login with Apple"),
     );
   }
 }

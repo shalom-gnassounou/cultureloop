@@ -1,6 +1,5 @@
 import 'package:cultureloop/controller/parcour_controller.dart';
 import 'package:cultureloop/service/model/art_work.dart';
-import 'package:cultureloop/widgets/category.dart';
 import 'package:cultureloop/widgets/header_section.dart';
 import 'package:cultureloop/widgets/itinerary_item.dart';
 import 'package:cultureloop/widgets/itinerary_card.dart';
@@ -57,7 +56,7 @@ class Itinerary extends StatelessWidget {
                           SizedBox(width: 12),
                           Flexible(
                             child: Text(
-                              'Add to this playlist',
+                              'Add an Itinerary',
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w500,
@@ -78,7 +77,7 @@ class Itinerary extends StatelessWidget {
                         }
 
                         if (snapshot.hasError) {
-                          return Text('Erreur : ${snapshot.error}');
+                          return Text('Errors : ${snapshot.error}');
                         }
 
                         final itineraries = snapshot.data ?? [];
@@ -87,7 +86,7 @@ class Itinerary extends StatelessWidget {
                           return Padding(
                             padding: const EdgeInsets.only(top: 24.0),
                             child: Text(
-                              'Aucun parcours enregistré pour le moment.',
+                              'No itineraries found.',
                               style: TextStyle(color: Colors.grey[700]),
                             ),
                           );
@@ -103,6 +102,7 @@ class Itinerary extends StatelessWidget {
                              name: itinerary.title,
                               date: itinerary.date,
                               imageUrl: itinerary.imageUrl,
+                              departement: itinerary.department,
 
                             );
                             return ItineraryItem(itineraryCard: card);

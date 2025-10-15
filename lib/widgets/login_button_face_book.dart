@@ -26,12 +26,12 @@ class LoginButtonFaceBook extends StatelessWidget {
             );
           }
         } on FirebaseAuthException catch (e) {
-          print("Erreur d'authentification: $e");
+          print("Probleme with Facebook login : $e");
         }
         ;
       },
       icon: Icon(Icons.facebook),
-      label: Text("Connexion avec facebook"),
+      label: Text("Login with Facebook"),
     );
   }
 }

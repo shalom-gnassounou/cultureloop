@@ -132,7 +132,7 @@ class UserProfilePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Other playlists',
+                      'Other itenararies',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
@@ -143,7 +143,7 @@ class UserProfilePage extends StatelessWidget {
                       onTap: () {
                         // Ajouter une nouvelle playlist
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Add new playlist')),
+                          SnackBar(content: Text('Add a new itenarary')),
                         );
                       },
                       child: Icon(

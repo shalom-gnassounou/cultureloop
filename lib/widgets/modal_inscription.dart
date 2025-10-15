@@ -48,7 +48,7 @@ class ModalInscription extends StatelessWidget {
                       "assets/Google.svg.png",
                       height: 24,
                     ),
-                    label: const Text("Inscription avec Google"),
+                    label: const Text("Sign-in with Google"),
                   ),
                   SizedBox(height: 20),
                   ElevatedButton.icon(
@@ -68,7 +68,7 @@ class ModalInscription extends StatelessWidget {
                       ;
                     },
                     icon: Icon(Icons.facebook),
-                    label: const Text("Inscription avec Facebook"),
+                    label: const Text("Sign-in with Facebook"),
                   ),
                   SizedBox(height: 20),
                   ElevatedButton.icon(
@@ -88,7 +88,7 @@ class ModalInscription extends StatelessWidget {
                       ;
                     },
                     icon: Icon(Icons.apple),
-                    label: const Text("Inscription avec Apple"),
+                    label: const Text("Sign-in with Apple"),
                   ),
                   SizedBox(
                     height: 20,
@@ -97,7 +97,7 @@ class ModalInscription extends StatelessWidget {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text("Fermer l'inscription"),
+                    child: const Text("Close "),
                   ),
                 ],
               ),
@@ -105,7 +105,7 @@ class ModalInscription extends StatelessWidget {
           },
         );
       },
-      child: const Text("Pas encore inscrit ?"),
+      child: const Text("Don't have an account yet ?"),
     );
   }
 }

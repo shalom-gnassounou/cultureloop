@@ -162,6 +162,7 @@ class VueDetail extends StatelessWidget {
                     imageUrl: imageUrl,
                     artist: artistDisplayName,
                     date: objectDate,
+                    department: department,
                   );
                 },
               ),

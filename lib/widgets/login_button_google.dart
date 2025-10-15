@@ -26,7 +26,7 @@ class LoginButton extends StatelessWidget {
             );
           }
         } on FirebaseAuthException catch (e) {
-          print("Erreur d'authentification: $e");
+          print("Probleme with Google login : $e");
         }
         ;
       },
@@ -34,7 +34,7 @@ class LoginButton extends StatelessWidget {
         "assets/Google.svg.png",
         height: 24,
       ),
-      label: Text("Connexion avec google"),
+      label: Text("Login with Google"),
     );
   }
 }
