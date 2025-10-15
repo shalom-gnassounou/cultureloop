@@ -40,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: 30),
 
               const Text(
-                "Connexion",
+                "Log-in",
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                     try {
                       authenticated = await auth.authenticate(
                         localizedReason:
-                            "Veuillez vous identifier avec votre empreinte",
+                            "Please authenticate to continue",
                         options: const AuthenticationOptions(
                           biometricOnly: true,
                           stickyAuth: true,
@@ -92,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                   } else {
                     setState(() {
                       _message =
-                          "Aucun capteur biométrique compatible disponible !";
+                          "No fingerprint scanner available  !";
                     });
                   }
                 },
